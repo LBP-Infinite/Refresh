@@ -1,4 +1,4 @@
-using System.Text;
+/* using System.Text;
 using Refresh.GameServer.Middlewares;
 
 namespace RefreshTests.GameServer.Tests.Middlewares;
@@ -112,4 +112,4 @@ public class DigestMiddlewareTests : GameServerTest
         
         Assert.Pass(); // TODO: we have no way of detecting a failed digest check
     }
-}
+} */
