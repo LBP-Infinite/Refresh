@@ -13,10 +13,10 @@ public class PresenceEndpointTests : GameServerTest
 
         HttpClient http = context.GetAuthenticatedClient(TokenType.Game, TokenGame.LittleBigPlanet2, TokenPlatform.PS3, user);
         
-        Assert.That(http.GetAsync("/lbp/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("0"));
+        Assert.That(http.GetAsync("/LITTLEBIGPLANETPS3_XML/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("0"));
         context.CreateLevel(user);
-        Assert.That(http.GetAsync("/lbp/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("1"));
+        Assert.That(http.GetAsync("/LITTLEBIGPLANETPS3_XML/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("1"));
         context.CreateLevel(user);
-        Assert.That(http.GetAsync("/lbp/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("2"));
+        Assert.That(http.GetAsync("/LITTLEBIGPLANETPS3_XML/planetStats/highestSlotId").Result.Content.ReadAsStringAsync().Result, Is.EqualTo("2"));
     }
 }

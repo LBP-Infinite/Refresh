@@ -24,18 +24,18 @@ public class LevelCommentTests : GameServerTest
             Content = "This is a test comment!",
         };
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
-        response = client.GetAsync($"/lbp/comments/user/{level.LevelId}").Result;
+        response = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/comments/user/{level.LevelId}").Result;
         SerializedCommentList userComments = response.Content.ReadAsXML<SerializedCommentList>();
         Assert.That(userComments.Items, Has.Count.EqualTo(1));
         Assert.That(userComments.Items[0].Content, Is.EqualTo(comment.Content));
         
-        response = client.PostAsync($"/lbp/deleteComment/user/{level.LevelId}?commentId={userComments.Items[0].SequentialId}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/deleteComment/user/{level.LevelId}?commentId={userComments.Items[0].SequentialId}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
-        response = client.GetAsync($"/lbp/comments/user/{level.LevelId}").Result;
+        response = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/comments/user/{level.LevelId}").Result;
         userComments = response.Content.ReadAsXML<SerializedCommentList>();
         Assert.That(userComments.Items, Has.Count.EqualTo(0));
     }
@@ -55,7 +55,7 @@ public class LevelCommentTests : GameServerTest
             Content = new string('S', 5000),
         };
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
 
@@ -73,7 +73,7 @@ public class LevelCommentTests : GameServerTest
             Content = "This is a test comment",
         };
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/postComment/user/I_AM_NOT_REAL", new StringContent(comment.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/postComment/user/I_AM_NOT_REAL", new StringContent(comment.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -85,7 +85,7 @@ public class LevelCommentTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.GetAsync($"/lbp/comments/user/I_AM_NOT_REAL").Result;
+        HttpResponseMessage response = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/comments/user/I_AM_NOT_REAL").Result;
         Assert.That(response.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -98,7 +98,7 @@ public class LevelCommentTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/deleteComment/user/{level.LevelId}?commentId=BAD", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/deleteComment/user/{level.LevelId}?commentId=BAD", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -110,7 +110,7 @@ public class LevelCommentTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/deleteComment/user/I_AM_NOT_REAL?commentId=1", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/deleteComment/user/I_AM_NOT_REAL?commentId=1", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -123,7 +123,7 @@ public class LevelCommentTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.PostAsync($"/lbp/deleteComment/user/{level.LevelId}?commentId=1", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/deleteComment/user/{level.LevelId}?commentId=1", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -144,15 +144,15 @@ public class LevelCommentTests : GameServerTest
             Content = "This is a test comment!",
         };
 
-        HttpResponseMessage response = client1.PostAsync($"/lbp/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
+        HttpResponseMessage response = client1.PostAsync($"/LITTLEBIGPLANETPS3_XML/postComment/user/{level.LevelId}", new StringContent(comment.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
-        response = client1.GetAsync($"/lbp/comments/user/{level.LevelId}").Result;
+        response = client1.GetAsync($"/LITTLEBIGPLANETPS3_XML/comments/user/{level.LevelId}").Result;
         SerializedCommentList userComments = response.Content.ReadAsXML<SerializedCommentList>();
         Assert.That(userComments.Items, Has.Count.EqualTo(1));
         Assert.That(userComments.Items[0].Content, Is.EqualTo(comment.Content));
         
-        response = client2.PostAsync($"/lbp/deleteComment/user/{level.LevelId}?commentId={userComments.Items[0].SequentialId}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        response = client2.PostAsync($"/LITTLEBIGPLANETPS3_XML/deleteComment/user/{level.LevelId}?commentId={userComments.Items[0].SequentialId}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Unauthorized));
     }
 
@@ -164,7 +164,7 @@ public class LevelCommentTests : GameServerTest
         GameLevel level = context.CreateLevel(user);
         GameComment comment = context.Database.PostCommentToLevel(level, user, "This is a test comment!");
         
-        CommentTests.RateComment(context, user, comment, $"/lbp/rateComment/user/{level.LevelId}", $"/lbp/comments/user/{level.LevelId}");
+        CommentTests.RateComment(context, user, comment, $"/LITTLEBIGPLANETPS3_XML/rateComment/user/{level.LevelId}", $"/LITTLEBIGPLANETPS3_XML/comments/user/{level.LevelId}");
     }
     
     [Test]
@@ -177,6 +177,6 @@ public class LevelCommentTests : GameServerTest
         GameLevel level = context.Database.GetStoryLevelById(levelId);
         GameComment comment = context.Database.PostCommentToLevel(level, user, "This is a test comment!");
         
-        CommentTests.RateComment(context, user, comment, $"/lbp/rateComment/developer/{level.LevelId}", $"/lbp/comments/developer/{level.LevelId}");
+        CommentTests.RateComment(context, user, comment, $"/LITTLEBIGPLANETPS3_XML/rateComment/developer/{level.LevelId}", $"/LITTLEBIGPLANETPS3_XML/comments/developer/{level.LevelId}");
     }
 }

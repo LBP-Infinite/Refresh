@@ -20,7 +20,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Boo}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Boo}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Boo));
@@ -40,7 +40,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Neutral}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Neutral}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Neutral));
@@ -60,7 +60,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Yay}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Yay}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Yay));
@@ -80,13 +80,13 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Yay}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Yay}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Yay));
         Assert.That(context.Database.GetRatingByUser(level, user2), Is.EqualTo(null));
         
-        message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Neutral}", new ByteArrayContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating={(sbyte)RatingType.Neutral}", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Neutral));
@@ -105,10 +105,10 @@ public class ReviewEndpointsTests : GameServerTest
 
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating=YAY", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating=YAY", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync($"/lbp/dpadrate/user/{level.LevelId}?rating=2", new ByteArrayContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{level.LevelId}?rating=2", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     } 
 
@@ -120,7 +120,7 @@ public class ReviewEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/dpadrate/user/{int.MaxValue}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/dpadrate/user/{int.MaxValue}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     } 
     
@@ -137,7 +137,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Boo));
@@ -157,7 +157,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=2", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=2", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Boo));
@@ -177,7 +177,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=3", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=3", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Neutral));
@@ -197,7 +197,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=4", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=4", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Yay));
@@ -217,7 +217,7 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=5", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=5", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         context.Database.Refresh();
         Assert.That(context.Database.GetRatingByUser(level, user1), Is.EqualTo(RatingType.Yay));
@@ -232,7 +232,7 @@ public class ReviewEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{int.MaxValue}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{int.MaxValue}?rating=1", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     } 
     
@@ -249,10 +249,10 @@ public class ReviewEndpointsTests : GameServerTest
         //Play the level at least once
         context.Database.PlayLevel(level, user1, 1);
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=WHAT", new ByteArrayContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=WHAT", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync($"/lbp/rate/user/{level.LevelId}?rating=6", new ByteArrayContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/rate/user/{level.LevelId}?rating=6", new ByteArrayContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     } 
 }

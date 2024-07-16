@@ -42,7 +42,7 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         SerializedLevelResources resourcesToUpload = message.Content.ReadAsXML<SerializedLevelResources>();
@@ -50,10 +50,10 @@ public class PublishEndpointsTests : GameServerTest
         Assert.That(resourcesToUpload.Resources[0], Is.EqualTo(TEST_ASSET_HASH));
 
         //Upload our """level"""
-        message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameLevelResponse response = message.Content.ReadAsXML<GameLevelResponse>();
@@ -64,14 +64,14 @@ public class PublishEndpointsTests : GameServerTest
         level.Title = "REPUBLISH!";
         level.Description = "REPUBLISHED!!!!";
         
-        message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         //Since theres no new assets, the XML deserializer will deserialize the resources list into null
         resourcesToUpload = message.Content.ReadAsXML<SerializedLevelResources>();
         Assert.That(resourcesToUpload.Resources, Is.EqualTo(null));
 
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         response = message.Content.ReadAsXML<GameLevelResponse>();
@@ -105,10 +105,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -138,10 +138,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -171,10 +171,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -204,10 +204,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -237,10 +237,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -273,10 +273,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -305,10 +305,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
     }
     
@@ -338,10 +338,10 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        message = client.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -373,7 +373,7 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client1.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client1.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         SerializedLevelResources resourcesToUpload = message.Content.ReadAsXML<SerializedLevelResources>();
@@ -381,11 +381,11 @@ public class PublishEndpointsTests : GameServerTest
         Assert.That(resourcesToUpload.Resources[0], Is.EqualTo(TEST_ASSET_HASH));
 
         //Upload our """level"""
-        message = client1.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
+        message = client1.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //As user 1, publish a level
-        message = client1.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client1.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameLevelResponse response = message.Content.ReadAsXML<GameLevelResponse>();
@@ -397,7 +397,7 @@ public class PublishEndpointsTests : GameServerTest
         level.Description = "REPUBLISHED!!!! HEEHEEHEE IM GONNA CHANGE YOUR LEVEL TO SAY BAD THINGS";
         
         //As user 2, try to republish over user 1's level
-        message = client2.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client2.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -429,7 +429,7 @@ public class PublishEndpointsTests : GameServerTest
             SkillRewards = new List<GameSkillReward>(),
         };
 
-        HttpResponseMessage message = client1.PostAsync("/lbp/startPublish", new StringContent(level.AsXML())).Result;
+        HttpResponseMessage message = client1.PostAsync("/LITTLEBIGPLANETPS3_XML/startPublish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         SerializedLevelResources resourcesToUpload = message.Content.ReadAsXML<SerializedLevelResources>();
@@ -437,11 +437,11 @@ public class PublishEndpointsTests : GameServerTest
         Assert.That(resourcesToUpload.Resources[0], Is.EqualTo(TEST_ASSET_HASH));
 
         //Upload our """level"""
-        message = client1.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
+        message = client1.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent("LVLb"u8.ToArray())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //As user 1, publish a level
-        message = client1.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client1.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameLevelResponse response = message.Content.ReadAsXML<GameLevelResponse>();
@@ -452,7 +452,7 @@ public class PublishEndpointsTests : GameServerTest
         level.Description = "PANA KIN!!!! MI PAIN PEKO E SINA";
         
         //As user 2, try to publish a level with the same root hash
-        message = client2.PostAsync("/lbp/publish", new StringContent(level.AsXML())).Result;
+        message = client2.PostAsync("/LITTLEBIGPLANETPS3_XML/publish", new StringContent(level.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -465,7 +465,7 @@ public class PublishEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/unpublish/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unpublish/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         DatabaseList<GameLevel> levelsByUser = context.Database.GetLevelsByUser(user, 1, 0, new LevelFilterSettings(TokenGame.LittleBigPlanet3), user);
@@ -480,7 +480,7 @@ public class PublishEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/unpublish/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unpublish/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -494,7 +494,7 @@ public class PublishEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user2);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/unpublish/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unpublish/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(Unauthorized));
 
         DatabaseList<GameLevel> levelsByUser = context.Database.GetLevelsByUser(user1, 1, 0, new LevelFilterSettings(TokenGame.LittleBigPlanet3), user1);

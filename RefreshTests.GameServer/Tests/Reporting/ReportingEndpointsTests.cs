@@ -25,7 +25,7 @@ public class ReportingEndpointsTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, TokenGame.LittleBigPlanet1, TokenPlatform.PS3, user);
         
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameReport report = new()
@@ -81,7 +81,7 @@ public class ReportingEndpointsTests : GameServerTest
             ScreenElements = new ScreenElements(),
         };
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(report.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(report.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
         context.Database.Refresh();
@@ -100,7 +100,7 @@ public class ReportingEndpointsTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, TokenGame.LittleBigPlanet1, TokenPlatform.PS3, user);
         
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameReport report = new()
@@ -109,7 +109,7 @@ public class ReportingEndpointsTests : GameServerTest
             JpegHash = TEST_ASSET_HASH,
         };
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(report.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(report.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -129,7 +129,7 @@ public class ReportingEndpointsTests : GameServerTest
         if(psp) client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
         
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         GameReport report = new()
@@ -166,7 +166,7 @@ public class ReportingEndpointsTests : GameServerTest
             },
         };
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(report.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(report.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(psp ? OK : BadRequest));
     }
     
@@ -181,7 +181,7 @@ public class ReportingEndpointsTests : GameServerTest
         if(psp) client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
         
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         GameReport report = new()
@@ -221,7 +221,7 @@ public class ReportingEndpointsTests : GameServerTest
             },
         };
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(report.AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(report.AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(psp ? OK : BadRequest));
     }
     
@@ -239,10 +239,10 @@ public class ReportingEndpointsTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, game, TokenPlatform.PS3, user);
 
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(new GameReport
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(new GameReport
         {
             Players = new Player[]
             {
@@ -286,10 +286,10 @@ public class ReportingEndpointsTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, game, TokenPlatform.PS3, user);
 
         //Upload our """photo"""
-        HttpResponseMessage message = client.PostAsync($"/lbp/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{TEST_ASSET_HASH}", new ReadOnlyMemoryContent(TestAsset)).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(new GameReport
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(new GameReport
         {
             Players = new Player[]
             {
@@ -327,7 +327,7 @@ public class ReportingEndpointsTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, TokenGame.Website, TokenPlatform.PS3, user);
 
-        HttpResponseMessage response = client.PostAsync("/lbp/grief", new StringContent(new GameReport
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/grief", new StringContent(new GameReport
         {
             Players = new Player[]
             {

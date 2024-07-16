@@ -30,10 +30,10 @@ public class TokenAbuseTests : GameServerTest
         using HttpClient gameClient = context.GetAuthenticatedClient(TokenType.Game, user);
         using HttpClient apiClient = context.GetAuthenticatedClient(TokenType.Api, user);
         
-        HttpResponseMessage request = apiClient.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage request = apiClient.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         Assert.That(request.StatusCode, Is.EqualTo(Forbidden));
         
-        request = gameClient.GetAsync("/lbp/eula").Result;
+        request = gameClient.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         Assert.That(request.StatusCode, Is.EqualTo(OK));
     }
     
@@ -45,7 +45,7 @@ public class TokenAbuseTests : GameServerTest
 
         using HttpClient gameClient = context.GetAuthenticatedClient(TokenType.Game, user, ipAddress: "256.727.272.636");
         
-        HttpResponseMessage request = gameClient.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage request = gameClient.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         Assert.That(request.StatusCode, Is.EqualTo(Forbidden));
     }
 

@@ -20,7 +20,7 @@ public class ActivityEndpointsTests : GameServerTest
         //Team pick a level, so that it appears in the news list
         context.Database.AddTeamPickToLevel(level);
 
-        HttpResponseMessage message = client.GetAsync("/lbp/news").Result;
+        HttpResponseMessage message = client.GetAsync("/LITTLEBIGPLANETPS3_XML/news").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         GameNewsResponse response = message.Content.ReadAsXML<GameNewsResponse>();
@@ -37,7 +37,7 @@ public class ActivityEndpointsTests : GameServerTest
         
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.GetAsync($"/lbp/stream").Result;
+        HttpResponseMessage message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/stream").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //TODO: once we figure out how to parse ActivityPage here, lets do that instead of this mess
@@ -57,10 +57,10 @@ public class ActivityEndpointsTests : GameServerTest
         
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.GetAsync($"/lbp/stream?timestamp=HAHA").Result;
+        HttpResponseMessage message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/stream?timestamp=HAHA").Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        message = client.GetAsync($"/lbp/stream?endTimestamp=HAHAHA").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/stream?endTimestamp=HAHAHA").Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
 }

@@ -26,7 +26,7 @@ public class ListTests : GameServerTest
         int page = 0;
         while (true)
         {
-            HttpResponseMessage message = await client.GetAsync($"/lbp/slots/newest?pageStart={(pageSize * page) + 1}&pageSize={pageSize}");
+            HttpResponseMessage message = await client.GetAsync($"/LITTLEBIGPLANETPS3_XML/slots/newest?pageStart={(pageSize * page) + 1}&pageSize={pageSize}");
             SerializedMinimalLevelList levelList = message.Content.ReadAsXML<SerializedMinimalLevelList>();
 
             if (pageSize * page >= levelList.Total) break;
@@ -52,7 +52,7 @@ public class ListTests : GameServerTest
             context.CreateLevel(user, i.ToString());
         }
         
-        HttpResponseMessage message = await client.GetAsync("/lbp/slots/newest?pageStart=11&pageSize=10");
+        HttpResponseMessage message = await client.GetAsync("/LITTLEBIGPLANETPS3_XML/slots/newest?pageStart=11&pageSize=10");
         string response = await message.Content.ReadAsStringAsync();
         
         Assert.That(response, Contains.Substring("hint_start=\"21\""));

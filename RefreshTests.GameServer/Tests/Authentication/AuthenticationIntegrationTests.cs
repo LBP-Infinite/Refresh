@@ -18,7 +18,7 @@ public class AuthenticationIntegrationTests : GameServerTest
     {
         using TestContext context = this.GetServer();
         
-        HttpResponseMessage unauthedRequest = context.Http.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage unauthedRequest = context.Http.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         Assert.That(unauthedRequest.StatusCode, Is.EqualTo(Forbidden));
 
         HttpClient authedClient = context.GetAuthenticatedClient(TokenType.Game, out string tokenData);
@@ -27,7 +27,7 @@ public class AuthenticationIntegrationTests : GameServerTest
         Assert.That(token, Is.Not.Null);
         Assert.That(token?.User, Is.Not.Null);
 
-        HttpResponseMessage authedRequest = authedClient.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage authedRequest = authedClient.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         Assert.That(authedRequest.StatusCode, Is.EqualTo(OK));
     }
     

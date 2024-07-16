@@ -46,7 +46,7 @@ public class LevelListOverrideIntegrationTests : GameServerTest
         
         // Verify that the endpoint isn't already attempting to return anything
         // This can be any endpoint that doesnt return all levels but I chose mmpicks
-        HttpResponseMessage message = client.GetAsync("/lbp/slots/mmpicks").Result;
+        HttpResponseMessage message = client.GetAsync("/LITTLEBIGPLANETPS3_XML/slots/mmpicks").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         SerializedMinimalLevelList levelList = message.Content.ReadAsXML<SerializedMinimalLevelList>();
         Assert.That(levelList.Items, Is.Empty);
@@ -65,14 +65,14 @@ public class LevelListOverrideIntegrationTests : GameServerTest
         Assert.That(overrideService.UserHasOverrides(user), Is.True);
         
         //Get the slots, and make sure it contains the level we set as the override
-        message = client.GetAsync("/lbp/slots/mmpicks").Result;
+        message = client.GetAsync("/LITTLEBIGPLANETPS3_XML/slots/mmpicks").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         levelList = message.Content.ReadAsXML<SerializedMinimalLevelList>();
         Assert.That(levelList.Items, Has.Count.EqualTo(1));
         Assert.That(levelList.Items[0].LevelId, Is.EqualTo(level.LevelId));
         
         //Verify the team picks slot list has stopped pointing to the user override
-        message = client.GetAsync("/lbp/slots/mmpicks").Result;
+        message = client.GetAsync("/LITTLEBIGPLANETPS3_XML/slots/mmpicks").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         levelList = message.Content.ReadAsXML<SerializedMinimalLevelList>();
         Assert.That(levelList.Items, Is.Empty);

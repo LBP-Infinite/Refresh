@@ -30,7 +30,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
     }
     
@@ -59,10 +59,10 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash1, new ByteArrayContent(data1.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash1, new ByteArrayContent(data1.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
-        response = client.PostAsync("/lbp/upload/" + hash2, new ByteArrayContent(data2.ToArray())).Result;
+        response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash2, new ByteArrayContent(data2.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(RequestEntityTooLarge));
     }
     
@@ -86,7 +86,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Unauthorized));
     }
 
@@ -112,7 +112,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
     }
     
@@ -138,7 +138,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
     }
     
@@ -161,7 +161,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
     }
     
@@ -183,7 +183,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Unauthorized));
     }
     
@@ -205,7 +205,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Unauthorized));
     }
     
@@ -227,7 +227,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
     }
     
@@ -241,7 +241,7 @@ public class AssetUploadTests : GameServerTest
 
         ReadOnlySpan<byte> data = "TEX a"u8;
         
-        HttpResponseMessage response = client.PostAsync($"/lbp/upload/{MissingHash}", new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/upload/{MissingHash}", new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -259,7 +259,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Unauthorized));
     }
     
@@ -277,7 +277,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(InternalServerError));
     }
     
@@ -295,10 +295,10 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
-        response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(Conflict));
     }
     
@@ -317,7 +317,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(RequestEntityTooLarge));
     }
     
@@ -335,7 +335,7 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/I_AM_NOT_REAL", new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/I_AM_NOT_REAL", new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -355,10 +355,10 @@ public class AssetUploadTests : GameServerTest
             .Replace("-", "")
             .ToLower();
 
-        HttpResponseMessage response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
-        response = client.GetAsync("/lbp/r/" + hash).Result;
+        response = client.GetAsync("/LITTLEBIGPLANETPS3_XML/r/" + hash).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
         byte[] returnedData = response.Content.ReadAsByteArrayAsync().Result;
@@ -383,7 +383,7 @@ public class AssetUploadTests : GameServerTest
             .ToLower();
         
         //Check the list initially, should have 1 item
-        HttpResponseMessage response = client.PostAsync("/lbp/filterResources", new StringContent(new SerializedResourceList(new[] { hash }).AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/filterResources", new StringContent(new SerializedResourceList(new[] { hash }).AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
         SerializedResourceList missingList = response.Content.ReadAsXML<SerializedResourceList>();
@@ -391,11 +391,11 @@ public class AssetUploadTests : GameServerTest
         Assert.That(missingList.Items[0], Is.EqualTo(hash));
         
         //Upload an asset
-        response = client.PostAsync("/lbp/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
+        response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/upload/" + hash, new ByteArrayContent(data.ToArray())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
         
         //Check the list after uploading, should now only have 0 items returned
-        response = client.PostAsync("/lbp/filterResources", new StringContent(new SerializedResourceList(new[] { hash }).AsXML())).Result;
+        response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/filterResources", new StringContent(new SerializedResourceList(new[] { hash }).AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
         missingList = response.Content.ReadAsXML<SerializedResourceList>();
@@ -410,7 +410,7 @@ public class AssetUploadTests : GameServerTest
         GameUser user = context.CreateUser();
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.GetAsync($"/lbp/r/{MissingHash}").Result;
+        HttpResponseMessage response = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/r/{MissingHash}").Result;
         Assert.That(response.StatusCode, Is.EqualTo(NotFound));
     }
 
@@ -422,7 +422,7 @@ public class AssetUploadTests : GameServerTest
         GameUser user = context.CreateUser();
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage response = client.GetAsync($"/lbp/r/{MissingHash}").Result;
+        HttpResponseMessage response = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/r/{MissingHash}").Result;
         Assert.That(response.StatusCode, Is.EqualTo(InternalServerError));
     }
     
@@ -434,10 +434,10 @@ public class AssetUploadTests : GameServerTest
         GameUser user = context.CreateUser();
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         
-        HttpResponseMessage response = client.GetAsync("/lbp/r/asdf").Result;
+        HttpResponseMessage response = client.GetAsync("/LITTLEBIGPLANETPS3_XML/r/asdf").Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
         
-        response = client.GetAsync("/lbp/r/..%2Frpc.json").Result;
+        response = client.GetAsync("/LITTLEBIGPLANETPS3_XML/r/..%2Frpc.json").Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -450,7 +450,7 @@ public class AssetUploadTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
         //Check the list initially, should have 1 item
-        HttpResponseMessage response = client.PostAsync("/lbp/filterResources", new StringContent(new SerializedResourceList(new[] { "I_AM_NOT_HASH" }).AsXML())).Result;
+        HttpResponseMessage response = client.PostAsync("/LITTLEBIGPLANETPS3_XML/filterResources", new StringContent(new SerializedResourceList(new[] { "I_AM_NOT_HASH" }).AsXML())).Result;
         Assert.That(response.StatusCode, Is.EqualTo(BadRequest));
     }
 }

@@ -7,7 +7,7 @@ namespace Refresh.GameServer.Endpoints;
 [MeansImplicitUse]
 public class GameEndpointAttribute : HttpEndpointAttribute
 {
-    public const string BaseRoute = "/lbp/";
+    public const string BaseRoute = "/LITTLEBIGPLANETPS3_XML/";
     
     public GameEndpointAttribute(string route, HttpMethods method = HttpMethods.Get, string contentType = Bunkum.Listener.Protocol.ContentType.Plaintext) 
         : base(BaseRoute + route, method, contentType) 

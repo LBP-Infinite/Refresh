@@ -18,7 +18,7 @@ public class QueueTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
         //Queue a level
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -28,7 +28,7 @@ public class QueueTests : GameServerTest
             .Items.First().LevelId, Is.EqualTo(level.LevelId));
         
         //Remove the level from the queue
-        message = client.PostAsync($"/lbp/lolcatftw/remove/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/remove/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -47,9 +47,9 @@ public class QueueTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
         //Queue 2 levels
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/add/user/{level1.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{level1.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
-        message = client.PostAsync($"/lbp/lolcatftw/add/user/{level2.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{level2.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -63,7 +63,7 @@ public class QueueTests : GameServerTest
         Assert.That(queue.Items.Any(q => q.LevelId == level2.LevelId));
         
         //Clear the queue
-        message = client.PostAsync($"/lbp/lolcatftw/clear", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/clear", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -79,7 +79,7 @@ public class QueueTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/add/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound)); 
     }
     
@@ -91,7 +91,7 @@ public class QueueTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/remove/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/remove/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound)); 
     }
     
@@ -104,9 +104,9 @@ public class QueueTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK)); 
-        message = client.PostAsync($"/lbp/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/add/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(Unauthorized)); 
         
         context.Database.Refresh();
@@ -125,7 +125,7 @@ public class QueueTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/lolcatftw/remove/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/lolcatftw/remove/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(Unauthorized)); 
         
         context.Database.Refresh();

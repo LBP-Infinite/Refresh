@@ -27,7 +27,7 @@ public class DigestMiddlewareTests : GameServerTest
         context.Server.Value.Server.AddEndpointGroup<TestEndpoints>();
         context.Server.Value.Server.AddMiddleware<DigestMiddleware>();
 
-        HttpResponseMessage response =  context.Http.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage response =  context.Http.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         
         Assert.Multiple(() =>
         {
@@ -43,7 +43,7 @@ public class DigestMiddlewareTests : GameServerTest
         context.Server.Value.Server.AddEndpointGroup<TestEndpoints>();
         context.Server.Value.Server.AddMiddleware<DigestMiddleware>();
 
-        const string endpoint = "/lbp/test";
+        const string endpoint = "/LITTLEBIGPLANETPS3_XML/test";
         const string expectedResultStr = "test";
         
         using MemoryStream blankMs = new();
@@ -74,7 +74,7 @@ public class DigestMiddlewareTests : GameServerTest
         context.Server.Value.Server.AddEndpointGroup<TestEndpoints>();
         context.Server.Value.Server.AddMiddleware<DigestMiddleware>();
 
-        const string endpoint = "/lbp/test";
+        const string endpoint = "/LITTLEBIGPLANETPS3_XML/test";
         const string expectedResultStr = "test";
         
         using MemoryStream blankMs = new();
@@ -108,7 +108,7 @@ public class DigestMiddlewareTests : GameServerTest
         context.Server.Value.Server.AddMiddleware<DigestMiddleware>();
         
         context.Http.DefaultRequestHeaders.Add("X-Digest-A", "asdf");
-        HttpResponseMessage response =  context.Http.GetAsync("/lbp/eula").Result;
+        HttpResponseMessage response =  context.Http.GetAsync("/LITTLEBIGPLANETPS3_XML/eula").Result;
         
         Assert.Pass(); // TODO: we have no way of detecting a failed digest check
     }

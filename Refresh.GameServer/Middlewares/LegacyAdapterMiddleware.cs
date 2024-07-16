@@ -7,7 +7,7 @@ namespace Refresh.GameServer.Middlewares;
 public class LegacyAdapterMiddleware : IMiddleware
 {
     private const string OldUrl = "/LITTLEBIGPLANETPS3_XML";
-    private const string NewUrl = "/lbp";
+    private const string NewUrl = "/LITTLEBIGPLANETPS3_XML";
     
     public void HandleRequest(ListenerContext context, Lazy<IDatabaseContext> database, Action next)
     {

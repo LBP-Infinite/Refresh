@@ -18,11 +18,11 @@ public class FavouriteSlotTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
         //Favourite a level
-        HttpResponseMessage message = client.PostAsync($"/lbp/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //Get the favourite slots now
-        message = client.GetAsync($"/lbp/favouriteSlots/{user.Username}").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/favouriteSlots/{user.Username}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         //Make sure the only entry is the level
         SerializedMinimalFavouriteLevelList result = message.Content.ReadAsXML<SerializedMinimalFavouriteLevelList>();
@@ -30,11 +30,11 @@ public class FavouriteSlotTests : GameServerTest
         Assert.That(result.Items.First().LevelId, Is.EqualTo(level.LevelId));
 
         //Unfavourite the level
-        message = client.PostAsync($"/lbp/unfavourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unfavourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //Get the favourite slots
-        message = client.GetAsync($"/lbp/favouriteSlots/{user.Username}").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/favouriteSlots/{user.Username}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         //Make sure its now empty
         result = message.Content.ReadAsXML<SerializedMinimalFavouriteLevelList>();
@@ -53,11 +53,11 @@ public class FavouriteSlotTests : GameServerTest
             client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
 
         //Favourite an invalid level
-        HttpResponseMessage message = client.PostAsync($"/lbp/favourite/slot/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/favourite/slot/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(psp ? OK : NotFound));
         
         //Get the favourite slots
-        message = client.GetAsync($"/lbp/favouriteSlots/{user.Username}").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/favouriteSlots/{user.Username}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         //Make sure its now empty
         SerializedMinimalFavouriteLevelList result = message.Content.ReadAsXML<SerializedMinimalFavouriteLevelList>();
@@ -76,7 +76,7 @@ public class FavouriteSlotTests : GameServerTest
             client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
         
         //Unfavourite an invalid level
-        HttpResponseMessage message = client.PostAsync($"/lbp/unfavourite/slot/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unfavourite/slot/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(psp ? OK : NotFound));
     }
     
@@ -93,15 +93,15 @@ public class FavouriteSlotTests : GameServerTest
             client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
 
         //Favourite a level
-        HttpResponseMessage message = client.PostAsync($"/lbp/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         //Favourite another level
-        message = client.PostAsync($"/lbp/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/favourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(psp ? OK : Unauthorized));
         
         //Get the favourite slots
-        message = client.GetAsync($"/lbp/favouriteSlots/{user.Username}").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/favouriteSlots/{user.Username}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         //Make sure it has the level
         SerializedMinimalFavouriteLevelList result = message.Content.ReadAsXML<SerializedMinimalFavouriteLevelList>();
@@ -122,7 +122,7 @@ public class FavouriteSlotTests : GameServerTest
             client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
 
         //Unfavourite a level, which we haven't favourited
-        HttpResponseMessage message = client.PostAsync($"/lbp/unfavourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/unfavourite/slot/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(psp ? OK : Unauthorized));
     }
 }

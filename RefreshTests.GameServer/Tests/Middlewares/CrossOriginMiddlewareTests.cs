@@ -40,7 +40,7 @@ public class CrossOriginMiddlewareTests : GameServerTest
         using TestContext context = this.GetServer();
         context.Server.Value.Server.AddMiddleware<CrossOriginMiddleware>();
 
-        HttpResponseMessage response = context.Http.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/lbp/eula")).Result;
+        HttpResponseMessage response = context.Http.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/LITTLEBIGPLANETPS3_XML/eula")).Result;
         Assert.Multiple(() =>
         {
             Assert.That(response.StatusCode, Is.EqualTo(Forbidden));

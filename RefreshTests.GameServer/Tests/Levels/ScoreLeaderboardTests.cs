@@ -27,10 +27,10 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = 5,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
-        message = client.GetAsync($"/lbp/topscores/user/{level.LevelId}/1").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/user/{level.LevelId}/1").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         SerializedScoreList scores = message.Content.ReadAsXML<SerializedScoreList>();
@@ -38,7 +38,7 @@ public class ScoreLeaderboardTests : GameServerTest
         Assert.That(scores.Scores[0].Player, Is.EqualTo(user.Username));
         Assert.That(scores.Scores[0].Score, Is.EqualTo(5));
         
-        message = client.GetAsync($"/lbp/scoreboard/user/{level.LevelId}").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{level.LevelId}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         SerializedMultiLeaderboardResponse scoresMulti = message.Content.ReadAsXML<SerializedMultiLeaderboardResponse>();
@@ -63,12 +63,12 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = 5,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/developer/1", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/developer/1", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
         
-        message = client.GetAsync($"/lbp/topscores/developer/1/1").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/developer/1/1").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         SerializedScoreList scores = message.Content.ReadAsXML<SerializedScoreList>();
@@ -76,7 +76,7 @@ public class ScoreLeaderboardTests : GameServerTest
         Assert.That(scores.Scores[0].Player, Is.EqualTo(user.Username));
         Assert.That(scores.Scores[0].Score, Is.EqualTo(5));
         
-        message = client.GetAsync($"/lbp/scoreboard/developer/1").Result;
+        message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/developer/1").Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         SerializedMultiLeaderboardResponse scoresMulti = message.Content.ReadAsXML<SerializedMultiLeaderboardResponse>();
@@ -94,7 +94,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message2 = client.GetAsync($"/lbp/topscores/user/{int.MaxValue}/1").Result;
+        HttpResponseMessage message2 = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/user/{int.MaxValue}/1").Result;
         Assert.That(message2.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -106,7 +106,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.GetAsync($"/lbp/scoreboard/user/{int.MaxValue}").Result;
+        HttpResponseMessage message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{int.MaxValue}").Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -126,7 +126,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = -1,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
 
         context.Database.Refresh();
@@ -158,7 +158,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = 69,
         };
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{level.LevelId}", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(shouldPass ? OK : BadRequest));
     }
     
@@ -177,7 +177,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = -1,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/developer/1", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/developer/1", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
 
         context.Database.Refresh();
@@ -201,7 +201,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = 0,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/user/{int.MaxValue}", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/user/{int.MaxValue}", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -220,7 +220,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Score = 0,
         }; 
         
-        HttpResponseMessage message = client.PostAsync($"/lbp/scoreboard/developer/-1", new StringContent(score.AsXML())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/developer/-1", new StringContent(score.AsXML())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -232,7 +232,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.GetAsync($"/lbp/scoreboard/developer/-1").Result;
+        HttpResponseMessage message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/scoreboard/developer/-1").Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -244,7 +244,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.GetAsync($"/lbp/topscores/developer/-1/1").Result;
+        HttpResponseMessage message = client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/developer/-1/1").Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -328,7 +328,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/play/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{level.LevelId}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
 
         context.Database.Refresh();
@@ -344,7 +344,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/play/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{int.MaxValue}", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(NotFound));
     }
     
@@ -358,7 +358,7 @@ public class ScoreLeaderboardTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/play/user/{level.LevelId}?count=2", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{level.LevelId}?count=2", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(OK));
         
         context.Database.Refresh();
@@ -376,10 +376,10 @@ public class ScoreLeaderboardTests : GameServerTest
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         client.DefaultRequestHeaders.UserAgent.TryParseAdd("LBPPSP CLIENT");
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/play/user/{level.LevelId}?count=gtgnyegth", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{level.LevelId}?count=gtgnyegth", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
         
-        HttpResponseMessage message2 = client.PostAsync($"/lbp/play/user/{level.LevelId}?count=-5", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message2 = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{level.LevelId}?count=-5", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message2.StatusCode, Is.EqualTo(BadRequest));
     }
     
@@ -392,7 +392,7 @@ public class ScoreLeaderboardTests : GameServerTest
 
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
 
-        HttpResponseMessage message = client.PostAsync($"/lbp/play/user/{level.LevelId}?count=3", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
+        HttpResponseMessage message = client.PostAsync($"/LITTLEBIGPLANETPS3_XML/play/user/{level.LevelId}?count=3", new ReadOnlyMemoryContent(Array.Empty<byte>())).Result;
         Assert.That(message.StatusCode, Is.EqualTo(BadRequest));
     }
 
@@ -459,7 +459,7 @@ public class ScoreLeaderboardTests : GameServerTest
         
         context.FillLeaderboard(level, 4, 1);
 
-        HttpResponseMessage response = await client.GetAsync($"/lbp/topscores/user/{level.LevelId}/1?pageStart=1&pageSize=2");
+        HttpResponseMessage response = await client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/user/{level.LevelId}/1?pageStart=1&pageSize=2");
         SerializedScoreList firstPage = response.Content.ReadAsXML<SerializedScoreList>();
         
         Assert.Multiple(() =>
@@ -469,7 +469,7 @@ public class ScoreLeaderboardTests : GameServerTest
             Assert.That(firstPage.Scores[1].Rank, Is.EqualTo(2));
         });
         
-        response = await client.GetAsync($"/lbp/topscores/user/{level.LevelId}/1?pageStart=3&pageSize=2");
+        response = await client.GetAsync($"/LITTLEBIGPLANETPS3_XML/topscores/user/{level.LevelId}/1?pageStart=3&pageSize=2");
         SerializedScoreList secondPage = response.Content.ReadAsXML<SerializedScoreList>();
         
         Assert.Multiple(() =>

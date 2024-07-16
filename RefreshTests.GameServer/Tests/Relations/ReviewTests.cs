@@ -32,9 +32,9 @@ public class ReviewTests : GameServerTest
             Text = "moku Sutolokanopu",
         };
         
-        Assert.That(reviewerClient.PostAsync($"/lbp/postReview/{slotType}/{levelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(OK));
+        Assert.That(reviewerClient.PostAsync($"/LITTLEBIGPLANETPS3_XML/postReview/{slotType}/{levelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(OK));
 
-        HttpResponseMessage response = reviewerClient.GetAsync($"/lbp/reviewsFor/{slotType}/{levelId}").Result;
+        HttpResponseMessage response = reviewerClient.GetAsync($"/LITTLEBIGPLANETPS3_XML/reviewsFor/{slotType}/{levelId}").Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
         SerializedGameReviewResponse levelReviews = response.Content.ReadAsXML<SerializedGameReviewResponse>();
@@ -42,7 +42,7 @@ public class ReviewTests : GameServerTest
         Assert.That(levelReviews.Items[0].Text, Is.EqualTo(review.Text));
         Assert.That(levelReviews.Items[0].Labels, Is.EqualTo(review.Labels));
         
-        response = reviewerClient.GetAsync($"/lbp/reviewsBy/{reviewPublisher.Username}").Result;
+        response = reviewerClient.GetAsync($"/LITTLEBIGPLANETPS3_XML/reviewsBy/{reviewPublisher.Username}").Result;
         Assert.That(response.StatusCode, Is.EqualTo(OK));
 
         levelReviews = response.Content.ReadAsXML<SerializedGameReviewResponse>();
@@ -58,7 +58,7 @@ public class ReviewTests : GameServerTest
         GameUser user = context.CreateUser();
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         
-        Assert.That(client.GetAsync("/lbp/reviewsBy/I_AM_NOT_REAL").Result.StatusCode, Is.EqualTo(NotFound));
+        Assert.That(client.GetAsync("/LITTLEBIGPLANETPS3_XML/reviewsBy/I_AM_NOT_REAL").Result.StatusCode, Is.EqualTo(NotFound));
     }
     
     [Test]
@@ -71,7 +71,7 @@ public class ReviewTests : GameServerTest
         
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         
-        Assert.That(client.GetAsync($"/lbp/reviewsFor/badType/{level.LevelId}").Result.StatusCode, Is.EqualTo(NotFound));
+        Assert.That(client.GetAsync($"/LITTLEBIGPLANETPS3_XML/reviewsFor/badType/{level.LevelId}").Result.StatusCode, Is.EqualTo(NotFound));
     }
     
     [Test]
@@ -83,7 +83,7 @@ public class ReviewTests : GameServerTest
         
         using HttpClient client = context.GetAuthenticatedClient(TokenType.Game, user);
         
-        Assert.That(client.GetAsync($"/lbp/reviewsFor/user/{int.MaxValue}").Result.StatusCode, Is.EqualTo(NotFound));
+        Assert.That(client.GetAsync($"/LITTLEBIGPLANETPS3_XML/reviewsFor/user/{int.MaxValue}").Result.StatusCode, Is.EqualTo(NotFound));
     }
     
     [Test]
@@ -107,7 +107,7 @@ public class ReviewTests : GameServerTest
             Text = "moku Sutolokanopu",
         };
         
-        Assert.That(reviewerClient.PostAsync($"/lbp/postReview/badType/{level.LevelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(NotFound));
+        Assert.That(reviewerClient.PostAsync($"/LITTLEBIGPLANETPS3_XML/postReview/badType/{level.LevelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(NotFound));
         
         context.Database.Refresh();
         Assert.That(level.Reviews, Is.Empty);
@@ -128,7 +128,7 @@ public class ReviewTests : GameServerTest
             Text = "moku Sutolokanopu",
         };
         
-        Assert.That(reviewerClient.PostAsync($"/lbp/postReview/user/{int.MaxValue}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(NotFound));
+        Assert.That(reviewerClient.PostAsync($"/LITTLEBIGPLANETPS3_XML/postReview/user/{int.MaxValue}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(NotFound));
     }
     
     [Test]
@@ -149,7 +149,7 @@ public class ReviewTests : GameServerTest
             Text = "moku Sutolokanopu",
         };
         
-        Assert.That(reviewerClient.PostAsync($"/lbp/postReview/user/{level.LevelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(BadRequest));
+        Assert.That(reviewerClient.PostAsync($"/LITTLEBIGPLANETPS3_XML/postReview/user/{level.LevelId}", new StringContent(review.AsXML())).Result.StatusCode, Is.EqualTo(BadRequest));
         
         context.Database.Refresh();
         Assert.That(level.Reviews, Is.Empty);
